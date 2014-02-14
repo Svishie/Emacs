@@ -21,8 +21,6 @@ class Person {//Start Person
     // Arrays som peker paa personobjekter som personen kjenner og 
     // som personen ikke liker
 
-    private Gave[] mineGaver;
-
     Person (String n) {
 	//Konstruktoer som setter navn paa personen
 	this.navn = n;
@@ -63,7 +61,7 @@ class Person {//Start Person
 
     public void blirForelsketI(Person p) {
 	//setter forelsketI til aa peke paa den gitte personen
-	if(!(this.equals(p)) {
+	if(!(this.equals(p))) {
 	    forelsketI = p;
 	}
     }
@@ -196,10 +194,10 @@ class Person {//Start Person
 
     public void samlerAv(String smlp, int ant) {
 	gaveKategori = smlp;
-	minegaver = new Gave[ant];
+	mineGaver = new Gave[ant];
     }
     
-    public void erSammenMed() {
+    public Person erSammenMed() {
 	return sammenMed;
     }
 
@@ -208,9 +206,32 @@ class Person {//Start Person
 
 	sammenMed = p;
 
-	if(!p.erSammenMed.equals(this)) {
+	if(!(p.erSammenMed().equals(this))) {
 	    p.bliSammenMed(this);
 	}
+    }
+
+    public Gave vilDuHaGaven(Gave gave) {//Metode for aa tilby gaver
+	if(gave.kategori().equals(gaveKategori) && plassTilGaven()) {
+	    for(int i = 0; i < mineGaver.length; ++i) {
+		if(mineGaver[i] == null) {
+		    mineGaver[i] = gave;
+		    return null;
+		}
+	    }
+	}
+
+	return gave;
+    }
+
+    private boolean plassTilGaven() {
+	for(int i = 0; i < mineGaver.length; ++i) {
+	    if(mineGaver[i] == null) {
+		return true;
+	    }
+	}
+
+	return false;
     }
 
 }//Person slutt
