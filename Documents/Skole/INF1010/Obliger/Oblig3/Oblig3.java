@@ -16,7 +16,7 @@ class Person {//Start Person
     public Person neste;
 
     private Person[]  kjenner = new Person[100];
-    private Person[] likerIkke = new Person[100]; // = uvenner
+    private Person[] likerIkke = new Person[10]; // = uvenner
     private Gave[] mineGaver;
     // Arrays som peker paa personobjekter som personen kjenner og 
     // som personen ikke liker
@@ -211,7 +211,8 @@ class Person {//Start Person
 	}
     }
 
-    public Gave vilDuHaGaven(Gave gave) {//Metode for aa tilby gaver
+    public Gave vilDuHaGaven(Gave gave, Boolean secondHand) {
+	//Metode for aa tilby gaver
 	if(gave.kategori().equals(gaveKategori) && plassTilGaven()) {
 	    for(int i = 0; i < mineGaver.length; ++i) {
 		if(mineGaver[i] == null) {
@@ -221,12 +222,40 @@ class Person {//Start Person
 	    }
 	}
 
+	if(secondHand) {
+	    return gave;
+	}
+	
+	if(sammenMed != null && sammenMed.vilDuHaGaven(gave, true) == null) {
+	    return null;
+	}
+
+	if(forelsketI != null && forelsketI.vilDuHaGaven(gave, true) == null) {
+	    return null;
+	}
+
+	if(gaveTilVenner(gave)) {
+	    return true;
+	}
+
 	return gave;
     }
 
     private boolean plassTilGaven() {
 	for(int i = 0; i < mineGaver.length; ++i) {
 	    if(mineGaver[i] == null) {
+		return true;
+	    }
+	}
+
+	return false;
+    }
+
+    private boolean gaveTilVenner(Gave gave) {
+	Person[] venner = hentVenner();
+
+	for(int i = 0; i < venner.length; ++i) {
+	    if(venner[i].vilDuHaGaven(gave, true) == null) {
 		return true;
 	    }
 	}
