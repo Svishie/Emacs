@@ -2,7 +2,7 @@ import java.util.*;
 
 class Oblig3 {
     public static void main(String[] args) {
-
+	Testklasse start = new Testklasse();
     }
 }
 
@@ -87,7 +87,7 @@ class Person {//Start Person
     private boolean inneholderPerson(Person p, Person[] a) {
 	//intern metode for aa sjekke om en gitt person i et gitt array
 	for(int i = 0; i < a.length; i++) {
-	    if(p.equals(a[i]))return true;
+	    if(p == a[i])return true;
 	}
 	return false;
     }
@@ -188,59 +188,69 @@ class Person {//Start Person
 	}
 
 	for(int i = 0; i < mineGaver.length; ++i) {
-	    //Skriv ut gaver
+	    Gave g = mineGaver[i];
+
+	    if(g != null)
+		System.out.println(g.gaveId());
 	}
     }
 
     public void samlerAv(String smlp, int ant) {
+	//Metode som initialiserer gavearray og setter kategori
 	gaveKategori = smlp;
 	mineGaver = new Gave[ant];
     }
     
     public Person erSammenMed() {
+	//returnerer sammenMed
 	return sammenMed;
     }
 
-    public void bliSammenMed(Person p) {
-	if(this.equals(p)) return;
+    public void blirSammenMed(Person p) {
+	//setter sammenMed til en person
+	if(this == p) return;
 
 	sammenMed = p;
 
-	if(!(p.erSammenMed().equals(this))) {
-	    p.bliSammenMed(this);
+	//setter personen du er sammen med til aa vaere sammen med deg
+	//hvis den ikke er det
+	if(!(p.erSammenMed() == this)) {
+	    p.blirSammenMed(this);
 	}
     }
 
     public Gave vilDuHaGaven(Gave gave, Boolean secondHand) {
 	//Metode for aa tilby gaver
 	if(gave.kategori().equals(gaveKategori) && plassTilGaven()) {
+	    //Hvis kategorien stemmer og det er plass
 	    for(int i = 0; i < mineGaver.length; ++i) {
-		if(mineGaver[i] == null) {
+		if(mineGaver[i] == null) {//Setter inn gaver paa ledig plass
 		    mineGaver[i] = gave;
 		    return null;
 		}
 	    }
 	}
 
-	if(secondHand) {
+	if(secondHand) {//Hvis den har blitt gitt videre
 	    return gave;
 	}
-	
+	//gir til sammenMed
 	if(sammenMed != null && sammenMed.vilDuHaGaven(gave, true) == null) {
 	    return null;
 	}
-
+	//gir til forelsketI
 	if(forelsketI != null && forelsketI.vilDuHaGaven(gave, true) == null) {
 	    return null;
 	}
-
+	//gir til venner
 	if(gaveTilVenner(gave)) {
-	    return true;
+	    return null;
 	}
 
 	return gave;
     }
 
+    //metode som sjekker om det er plass til gaven
     private boolean plassTilGaven() {
 	for(int i = 0; i < mineGaver.length; ++i) {
 	    if(mineGaver[i] == null) {
@@ -251,6 +261,7 @@ class Person {//Start Person
 	return false;
     }
 
+    //metode som tilbyr gave til venner
     private boolean gaveTilVenner(Gave gave) {
 	Person[] venner = hentVenner();
 
@@ -264,3 +275,54 @@ class Person {//Start Person
     }
 
 }//Person slutt
+
+class Testklasse {//Testklasse start
+    //pekere
+    ListeAvPersoner liste;
+    Personer hentPers;
+    Person nestePerson;
+    GaveLager hentGaver;
+    Gave nesteGave;
+
+    //array med personnavn
+    String[] personNavn;
+    
+    Testklasse() {
+	liste = new ListeAvPersoner();
+	hentPers = new Personer();
+	nestePerson = hentPers.hentPerson();
+
+	//Oppretter personliste
+	while(nestePerson != null) {
+	    liste.settInnSist(nestePerson);
+
+	    nestePerson = hentPers.hentPerson();
+	}
+
+	//Henter personnavn
+	personNavn = hentPers.hentPersonnavn();
+
+	hentGaver = new GaveLager();
+	nesteGave = hentGaver.hentGave();
+
+	//Distribuerer gaver
+	while(nesteGave != null) {
+	    Person p;
+
+	    for(int i = 0; i < personNavn.length; ++i) {
+		p = liste.finnPerson(personNavn[i]);
+		//Tilbyr gaven til alle personene i lista
+		if(p.vilDuHaGaven(nesteGave, false) == null) {
+		    //Hvis gaven godtas brytes loopen og samme prosedyre
+		    //startes for neste gave
+		    break;
+		}
+	    }
+	    nesteGave = hentGaver.hentGave();
+	}
+	//Skriver ut informasjon om alle i lista
+	liste.skrivAlle();
+
+    }
+
+}//Testklasse slutt

@@ -42,7 +42,7 @@ public class ListeAvPersoner {
     }
     
     public void settInnSist(Person inn){
-	if(seEtterPerson(nypers)) {
+	if(seEtterPerson(inn)) {
 	    System.out.println("Personen finnes allerede i lista");
 	    return;
 	}
@@ -59,7 +59,7 @@ public class ListeAvPersoner {
 	}
 
 	if(!(seEtterPerson(denne)) && denne.equals(nypers))
-	    return true;
+	    return;
 
 	nypers.neste = denne.neste;
 	denne.neste = nypers;
@@ -71,7 +71,7 @@ public class ListeAvPersoner {
     public Person finnPerson(String s) {
 	Person p = personliste.neste;
         for (int i = antall; i>0; i--) {
-	    if (p.hentNavn().equals(s)) return p;
+	    if (p.getNavn().equals(s)) return p;
 	    else p = p.neste;
         }
 	return null;
@@ -90,15 +90,15 @@ public class ListeAvPersoner {
     }
 
     public boolean seEtterPerson(Person p) {
-	Person p = personliste.neste;
+	Person nestePerson = personliste.neste;
 
 	for(int i = antall; i > 0; i--) {
-	    if(p.equals(p)) return true;
+	    if(nestePerson.equals(p)) return true;
 
-	    else p = p.neste;
+	    else nestePerson = nestePerson.neste;
 	}
 
-	return null;
+	return false;
     }
 }
 

@@ -1,13 +1,23 @@
-public class GaveLager { 
+public class GaveLager {
     static private int ANTALLGAVER = 239;
-    private Gave [] gaver;
+    private Gave [] gaver = new Gave[ANTALLGAVER];
+    private int antallSomSkalReturneres = 0;
     private int nesteGaveNr = 0;
 
     GaveLager() {
-	gaver = new Gave[ANTALLGAVER];
+	antallSomSkalReturneres = 500;
+	lagGaver();
+    }
+
+    GaveLager(int assr) {
+	antallSomSkalReturneres = assr;
+	lagGaver();
+    }
+
+    private void lagGaver () {
 
 	gaver[0] = new Bok("William Faulkner: Absalom, Absalom!");
-	gaver[1] = new Bok("Carlo Fruttero and Franco Lucentini: A che punto è la notte");
+	gaver[1] = new Vin("Badia a Coltibuono Toscana Cancelli, 2011");
 	gaver[2] = new Bok("Aldous Huxley: After Many a Summer Dies the Swan");
 	gaver[3] = new Bok("Eugene O'Neill: Ah, Wilderness!");
 	gaver[4] = new Bok("Sidney Howard: Alien Corn");
@@ -24,9 +34,9 @@ public class GaveLager {
 	gaver[15] = new Plate ("Santana: Supernatural");
 	gaver[16] = new Bok("Val McDermid: Beneath the Bleeding");
 	gaver[17] = new Plate ("Guns N' Roses: Appetite for Destruction");
-	gaver[18] = new Bok("Noël Coward: Blithe Spirit");
+	gaver[18] = new Bok("Noel Coward: Blithe Spirit");
 	gaver[19] = new Plate ("Carole King: Tapestry");
-	gaver[20] = new Bok("Françoise Sagan: Bonjour Tristesse");
+	gaver[20] = new Bok("Francoise Sagan: Bonjour Tristesse");
 	gaver[21] = new Bok("Colin Wilson: Brandy of the Damned");
 	gaver[22] = new Bok("Dee Brown: Bury My Heart at Wounded Knee");
 	gaver[23] = new Bok("Agatha Christie: Butter In a Lordly Dish");
@@ -59,7 +69,7 @@ public class GaveLager {
 	gaver[50] = new Bok("Katharine Hull and Pamela Whitlock: The Far-Distant Oxus");
 	gaver[51] = new Bok("Ernest Hemingway: A Farewell to Arms");
 	gaver[52] = new Bok("Thomas Hardy: Far From the Madding Crowd");
-	gaver[53] = new Bok("Søren Kierkegaard: Fear and Trembling");
+	gaver[53] = new Vin("A.A. Badenhorst Family Swartland, 2009");
 	gaver[54] = new Bok("Roger Zelazny: For a Breath I Tarry");
 	gaver[55] = new Bok("Ernest Hemingway: For Whom the Bell Tolls");
 	gaver[56] = new Bok("James Jones: From Here to Eternity");
@@ -86,7 +96,7 @@ public class GaveLager {
 	gaver[57] = new Bok("John Steinbeck: In Dubious Battle");
 	gaver[58] = new Bok("Maya Angelou: I Know Why the Caged Bird Sings");
 	gaver[59] = new Bok("Peter Robinson: In a Dry Season");
-	gaver[60] = new Bok("André Brink: An Instant In The Wind");
+	gaver[60] = new Vin("Mastroberardino Taurasi Radici Riserva, 2006");
 	gaver[61] = new Bok("Ray Bradbury: I Sing the Body Electric");
 	gaver[62] = new Bok("Robert A. Heinlein: I Will Fear No Evil");
 	gaver[63] = new Bok("Katherine Paterson: Jacob Have I Loved");
@@ -116,14 +126,14 @@ public class GaveLager {
 	gaver[87] = new Bok("Kamala Markandaya: Nectar in a Sieve");
 	gaver[88] = new Bok("Cormac McCarthy: No Country for Old Men");
 	gaver[89] = new Bok("Nevil Shute: No Highway");
-	gaver[90] = new Bok("José Rizal: Noli Me Tangere");
+	gaver[90] = new Vin("Carlisle Zinfandel Napa Valley Hayne Vineyard, 2011");
 	gaver[91] = new Bok("Chinua Achebe: No Longer at Ease");
 	gaver[92] = new Bok("H. E. Bates: Now Sleeps the Crimson Petal");
 	gaver[93] = new Bok("Lois Lowry: Number the Stars");
 	gaver[94] = new Bok("W. Somerset Maugham: Of Human Bondage");
 	gaver[95] = new Bok("John Steinbeck: Of Mice and Men");
 	gaver[96] = new Bok("H. E. Bates: Oh! To be in England");
-	gaver[97] = new Bok("André Brink: The Other Side of Silence");
+	gaver[97] = new Vin("Raymond Cabernet Sauvignon Napa Valley Generations, 2009");
 	gaver[98] = new Bok("W. Somerset Maugham: The Painted Veil");
 	gaver[99] = new Bok("Robert B. Parker: Pale Kings and Princes");
 	gaver[100] = new Bok("Paul Kennedy: The Parliament of Man");
@@ -167,7 +177,7 @@ public class GaveLager {
 	gaver[138] = new Vin("Hewitt Cabernet Sauvignon Rutherford, 2010");
 	gaver[139] = new Bok("Robert A. Heinlein: To Sail Beyond the Sunset");
 	gaver[140] = new Bok("Connie Willis: To Say Nothing of the Dog");
-	gaver[141] = new Bok("Philip José Farmer: To Your Scattered Bodies Go");
+	gaver[141] = new Vin("Graham Tawny Port 20 Year Old");
 	gaver[142] = new Bok("William Makepeace Thackeray: Vanity Fair");
 	gaver[143] = new Vin("Reynvaan Syrah Walla Walla Valley Stonessence, 2010");
 	gaver[144] = new Bok("Flannery O'Connor: The Violent Bear It Away");
@@ -185,13 +195,13 @@ public class GaveLager {
 	gaver[156] = new Bok("Mary Elizabeth Braddon: The World, the Flesh and the Devil");
 	gaver[157] = new Bok("Dorothy L. Sayers: Thrones, Dominations");
 	gaver[158] = new Bok("Rudyard Kipling short story: Tiger! Tiger!");
-	gaver[159] = new Vin("Château Canon-La Gaffelière St.-Emilion, 2010");
+	gaver[159] = new Vin("Fontanafredda Barolo La Rosa, 2008");
 	gaver[160] = new Bok("Stephen Gray: Time of our Darkness");
 	gaver[161] = new Bok("John Steinbeck: To a God Unknown");
 	gaver[162] = new Bok("Jessica Anderson: Tirra Lirra by the River");
 	gaver[163] = new Vin("Giuseppe Mascarello & Figlio Barolo Monprivato, 2008");
-	gaver[164] = new Vin("Domaine du Pégaü Châteauneuf-du-Pape Cuvée Réservée, 2010");
-	gaver[165] = new Vin("Château de Beaucastel Châteauneuf-du-Pape, 2010");
+	gaver[164] = new Vin("Wynns Coonawarra Estate Cabernet Sauvignon Coonawarra Black Label, 2010");
+	gaver[165] = new Vin("Caymus Cabernet Sauvignon Napa Valley Special Selection, 2010");
 	gaver[166] = new Vin("Lewis Cabernet Sauvignon Napa Valley Reserve, 2010");
 	gaver[167] = new Vin("Quilceda Creek Cabernet Sauvignon Columbia Valley, 2010");
 	gaver[168] = new Bok("Evelyn Waugh: Vile Bodies");
@@ -205,30 +215,30 @@ public class GaveLager {
 	gaver[176] = new Bok("H. E. Bates: When the Green Woods Laugh");
 	gaver[177] = new Plate ("Shania Twain: Come On Over");
 	gaver[178] = new Bok("Robert B. Parker: The Widening Gyre");
-	gaver[179] = new Vin("La Rioja Alta Rioja Viña Ardanza Reserva, 2004");
+	gaver[179] = new Vin("Mamete Prevostini Valtellina Superiore Sassella, 2009");
 	gaver[180] = new Bok("Susan Swan: The Wives of Bath");
 	gaver[181] = new Vin("Livio Sassetti Brunello di Montalcino Pertimali, 2008");
 	gaver[182] = new Bok("H. E. Bates: The Yellow Meads of Asphodel");
-	gaver[183] = new Vin("Álvaro Palacios Priorat Les Terrasses Velles Vinyes, 2011");
+	gaver[183] = new Vin("Quinta do Crasto Douro Reserva Old Vines, 2010");
 	gaver[184] = new Vin("Spring Valley Uriah Walla Walla Valley, 2010");
-	gaver[185] = new Vin("Domaine de l'A Castillon Côtes de Bordeaux, 2010");
+	gaver[185] = new Vin("Domaine Overnoy-Crinquand Arbois Pupillin Vieilles Vignes, 2009");
 	gaver[186] = new Plate ("The Beatles: Abbey Road");
 	gaver[187] = new Plate ("Bruce Springsteen: Born in the U.S.A.");
 	gaver[188] = new Plate ("Celine Dion: Falling into You");
 	gaver[189] = new Plate ("Celine Dion: Let's Talk About Love");
 	gaver[190] = new Plate ("Dire Straits: Brothers in Arms");
 	gaver[191] = new Plate ("Whitney Houston: Whitney Houston");
-	gaver[192] = new Vin("Château du Retout Haut-Médoc, 2010");
+	gaver[192] = new Vin("M. Lapierre Morgon, 2011");
 	gaver[193] = new Vin("Bodega Norton Malbec Mendoza Reserva, 2011");
 	gaver[194] = new Vin("Quinta do Passadouro Douro, 2010");
 	gaver[195] = new Vin("Mollydooker Two Left Feet McLaren Vale, 2011");
 	gaver[196] = new Plate ("Pink Floyd: The Dark Side of the Moon");
-	gaver[197] = new Plate ("Eagles: Their Greatest Hits (1971–1975)");
+	gaver[197] = new Plate ("Eagles: Their Greatest Hits (1971â€“1975)");
 	gaver[198] = new Plate ("AC/DC: Back in Black");
 	gaver[199] = new Plate ("Bee Gees: Saturday Night Fever");
 	gaver[200] = new Plate ("Fleetwood Mac: Rumours");
 	gaver[201] = new Plate ("Whitney Houston: The Bodyguard");
-	gaver[202] = new Vin("Chateau Dereszla Tokaji Aszú 5 Puttonyos, 2007");
+	gaver[202] = new Vin("Pierre Paillard Brut Champagne");
 	gaver[203] = new Plate ("Led Zeppelin: Led Zeppelin IV");
 	gaver[204] = new Plate ("Meat Loaf: Bat Out of Hell");
 	gaver[205] = new Plate ("Alanis Morissette: Jagged Little Pill");
@@ -237,12 +247,12 @@ public class GaveLager {
 	gaver[208] = new Plate ("Mariah Carey: Music Box");
 	gaver[209] = new Plate ("Various artists: Dirty Dancing");
 	gaver[210] = new Plate ("Elton John: Goodbye Yellow Brick Road");
-	gaver[211] = new Vin("R. López de Heredia Viña Tondonia Rioja White Viña Gravonia Crianza, 2003");
+	gaver[211] = new Vin("Mamete Prevostini Valtellina Superiore Sassella, 2009");
 	gaver[212] = new Vin("Lagier Meredith Syrah Mount Veeder, 2010");
 	gaver[213] = new Vin("Patz & Hall Pinot Noir Carneros Hyde Vineyard, 2010");
 	gaver[214] = new Vin("Bodegas Hidalgo Gitana Manzanilla Jerez La Gitana, NV");
 	gaver[215] = new Vin("Ravines Riesling Finger Lakes Dry, 2012");
-	gaver[216] = new Vin("Bodegas Valdemar Rioja Inspiración Selección, 2010");
+	gaver[216] = new Vin("Chateau Ste. Michelle Sauvignon Blanc Horse Heaven Hills Horse Heaven Vineyard, 2012");
 	gaver[217] = new Plate ("James Horner: Titanic: Music from the Motion Picture");
 	gaver[218] = new Bok("Madeleine L'Engle: An Acceptable Time");
 	gaver[219] = new Plate ("Metallica: Metallica");
@@ -268,9 +278,22 @@ public class GaveLager {
     }
 
 
+    /* 
+       Metode som returnerer et antall gaver bestemt av variabelen
+       antallSomSkalReturneres som settes i konstruktÃ¸ren til GaveLager.
+       Hvis programmet som bruker gavelageret bruker konstruktÃ¸ren uten
+       parameter, blir antallSomSkalReturneres satt til 500.
+       
+       NÃ¥r antallSomSkalReturneres er returnert returnerer
+       metoden null for alle etterfÃ¸lgende kall.
+
+       NÃ¥r ANTALLGAVER er returnert, vil de samme gavene bli gjentatt
+       hvis antallSomSkalReturneres > ANTALLGAVER
+    */
+
     public Gave hentGave() {
 	Gave nesteGave = null;
-	if (nesteGaveNr < 500) {
+	if (nesteGaveNr < antallSomSkalReturneres ) {
 	    nesteGave = gaver[nesteGaveNr % ANTALLGAVER];
 	    nesteGaveNr++;
 	}

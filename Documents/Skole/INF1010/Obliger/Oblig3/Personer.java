@@ -69,9 +69,9 @@ public class Personer {
 
 	for (int i=0; i<antall; i=i+3)
 	    persTabell[i].samlerAv("bok", 12);
-	for (int i=0; i<antall; i=i+3)
+	for (int i=1; i<antall; i=i+3)
 	    persTabell[i].samlerAv("vin", 5);
-	for (int i=0; i<antall; i=i+3)
+	for (int i=2; i<antall; i=i+3)
 	    persTabell[i].samlerAv("cd", 7);
 	for (int i=1; i<antall; i=i+7)
 	    persTabell[i].samlerAv("ingenting", 1);
