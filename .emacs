@@ -12,14 +12,15 @@
 
 ;; install some packages if missing
 (let* ((packages '(auto-complete
-		  ido-vertical-mode
-		  monokai-theme
-		  undo-tree
-		  ;;if you want more packages, add them here
-		  ))
+		   autopair
+		   ido-vertical-mode
+		   monokai-theme
+		   undo-tree
+		   ;;if you want more packages, add them here
+		   ))
        (packages (remove-if 'package-installed-p packages)))
   (when packages
-	 (package-refresh-contents)
+    (package-refresh-contents)
 	 (mapc 'package-install packages)))
 
 ;; no splash screen
@@ -76,8 +77,22 @@
 ;; kills active buffer, not asking which one to kill
 (global-set-key (kbd"C-x k") 'kill-this-buffer)
 
-
+;; auto parentes
+(electric-pair-mode 1)
 
 ;; auto-indent etter newline
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
+;; defining a function that sets the right indentation to the marked
+;; text, or the entire buffer if no text is selected.
+(defun tidy ()
+  "Ident, untabify and unwhitespacify current buffer, or region if active."
+  (interactive)
+  (let ((beg (if (region-active-p) (region-beginning) (point-min)))
+        (end (if (region-active-p) (region-end)       (point-max))))
+    (whitespace-cleanup)
+    (indent-region beg end nil)
+    (untabify beg end)))
+
+;; bindes the tidy-function to C-TAB
+(global-set-key (kbd "<C-tab>") 'tidy)
