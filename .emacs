@@ -94,5 +94,9 @@
     (indent-region beg end nil)
     (untabify beg end)))
 
-;; bindes the tidy-function to C-TAB
+;; binds the tidy-function to C-TAB
 (global-set-key (kbd "<C-tab>") 'tidy)
+
+;; emacs starts in full-screen
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
