@@ -17,6 +17,7 @@
 		   monokai-theme
 		   undo-tree
 		   ;;if you want more packages, add them here
+		   php-mode
 		   ))
        (packages (remove-if 'package-installed-p packages)))
   (when packages
@@ -100,3 +101,51 @@
 ;; emacs starts in full-screen
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
+;; Use package and download from Melpa!
+(require 'package)
+(add-to-list 'package-archives
+             '("MELPA" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+(unless (file-exists-p (expand-file-name
+                        (concat package-user-dir
+                                "/archives/MELPA/")))
+  (package-refresh-contents))
+
+;; Declare a list of packages to install.
+(dolist (package '(ac-geiser         ; Auto-complete backend for geiser
+                   auto-complete     ; auto completion
+                   geiser            ; GNU Emacs and Scheme talk to each other
+                   paredit           ; minor mode for editing parentheses
+                   pretty-lambdada)) ; `lambda' as the Greek letter.
+  (unless (package-installed-p package)
+    (package-install package)))
+
+;; We use racket.
+(setq geiser-active-implementations '(racket))
+
+;; Visualize matching parentheses.
+(show-paren-mode 1)
+
+;; Make sure these features are loaded.
+(require 'auto-complete-config)
+(require 'ac-geiser)
+
+;; Standard auto-complete setup.
+(ac-config-default)
+
+;; ac-geiser recommended setup.
+(add-hook 'geiser-mode-hook 'ac-geiser-setup)
+(add-hook 'geiser-repl-mode-hook 'ac-geiser-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'geiser-repl-mode))
+
+;; pretty-lambdada setup.
+(add-to-list 'pretty-lambda-auto-modes 'geiser-repl-mode)
+(pretty-lambda-for-modes)
+
+;; Loop the pretty-lambda-auto-modes list.
+(dolist (mode pretty-lambda-auto-modes)
+;; add paredit-mode to all mode-hooks
+(add-hook (intern (concat (symbol-name mode) "-hook")) 'paredit-mode))
